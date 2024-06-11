@@ -1,0 +1,53 @@
+@page "/auth"
+@using System.Net
+
+@inject IJSRuntime js
+
+<PageTitle>Challenge 9 - Secure Authentification</PageTitle>
+
+<h1>Secure Authentification</h1>
+
+<hr/>
+
+<div class="styleform">
+
+    <div class="rightcolumn">
+    
+        <label>Username</label>
+        <label>password</label>
+    
+    </div>
+
+    <div class="leftcolumn">
+        
+        <InputText @bind-Value="username" />
+        <InputText @bind-Value="password" />
+    
+    </div>
+</div>
+
+<hr/>
+
+<InputText @bind-Value="token" />
+<button class="btn btn-primary" @onclick="Create">Create Account</button>
+
+@code {
+    string username, password, token;
+
+    async void Create()
+    {
+        var response = await Configs.Client.PostAsJsonAsync<UserData>(
+            $"/create", new UserData(username, password, null)
+        );
+        
+        if (response.StatusCode != HttpStatusCode.OK) {
+            await js.InvokeVoidAsync("alert", response);
+            return;
+        }
+        
+        var message = await response.Content.ReadAsStringAsync();
+        await js.InvokeVoidAsync("alert", message);
+    }
+
+    record UserData(string username, string password, string email);
+}
