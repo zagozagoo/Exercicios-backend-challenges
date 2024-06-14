@@ -10,4 +10,7 @@ public interface UserService {
     List<User> findByUsernameContaining(String user);
     boolean validateUsername(User user);
     boolean validateEmail(User user);
+    public boolean validatePassword(User user);
+    public boolean validateLenght(User user);
+    public boolean validateEmailFormat(User user);
 }

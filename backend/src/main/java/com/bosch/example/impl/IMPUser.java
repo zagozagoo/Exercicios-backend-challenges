@@ -42,4 +42,53 @@ public class IMPUser implements UserService {
         }
     }
 
+    public boolean validateLenght (User user){
+        if (user.getEmail().length() < 4) {
+            return false;
+        }
+        if (user.getPassword().length() < 4) {
+            return false;
+        }
+        if (user.getUsername().length() < 4) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validatePassword(User user) {
+        String pass = user.getPassword();
+
+        boolean maiuscula = false; 
+        boolean minuscula = false;
+        boolean digit = false;
+
+        if (pass.length() < 8) {
+            return false;
+        }
+
+        for (int i = 0; i < pass.length(); i++) {
+            char ch = pass.charAt(i);
+            if (Character.isUpperCase(ch)) {
+                maiuscula = true;
+            } else if (Character.isLowerCase(ch)) {
+                minuscula = true;
+            }
+            if (Character.isDigit(ch)) {
+                digit = true;
+            }
+        }
+
+        if (minuscula && maiuscula && digit) {
+            return true;
+        }
+        return false;
+
+    } 
+
+    public boolean validateEmailFormat(User user) {
+        String email = user.getEmail();
+        String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        return email.matches(regex);
+    }
+
 }
