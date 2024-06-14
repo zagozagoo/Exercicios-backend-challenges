@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bosch.example.Services.UserService;
+import com.bosch.example.Services.UserCreateService;
 import com.bosch.example.model.User;
 import com.bosch.example.repositories.JPAUserRepository;
 
-public class IMPUser implements UserService {
+public class IMPUser implements UserCreateService {
     @Autowired
     JPAUserRepository repo;
 
