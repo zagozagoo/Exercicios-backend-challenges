@@ -7,8 +7,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.bosch.example.Services.CityService;
+import com.bosch.example.Services.UserService;
 import com.bosch.example.Services.CepService;
 import com.bosch.example.impl.DatabaseCity;
+import com.bosch.example.impl.IMPUser;
 import com.bosch.example.impl.IMPViaCep;
 
 @Configuration
@@ -33,5 +35,10 @@ public class CorsConfiguration implements WebMvcConfigurer {
     @Bean
     public CepService viaCepService() {
         return new IMPViaCep();
+    }
+
+    @Bean
+    public UserService UserService() {
+        return new IMPUser();
     }
 }
