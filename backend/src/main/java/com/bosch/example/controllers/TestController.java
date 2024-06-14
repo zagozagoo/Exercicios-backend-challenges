@@ -1,26 +1,27 @@
 package com.bosch.example.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.bosch.example.Services.ValidateCpfService;
-import com.bosch.example.Services.ViaCepService;
+import com.bosch.example.Services.CepService;
 import com.bosch.example.dto.CepResult;
 import com.bosch.example.dto.CollatzResult;
+import com.bosch.example.dto.EnderecoDTO;
 import com.bosch.example.dto.ImaginaryResult;
 import com.bosch.example.dto.ReverseResult;
-import com.bosch.example.impl.IMPValidateCpf;
-import com.bosch.example.impl.IMPViaCep;
-import com.bosch.example.utils.Endereco;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
 public class TestController {
+
+    @Autowired
+    CepService validateCEP;
     
     // exercicio 1:
     @GetMapping("reverse/{text}")
@@ -65,14 +66,12 @@ public class TestController {
     // Exercicio 4 - TALVEZ esteja errado, não funciona, proxy baitolou
     @GetMapping("/curitiba")
     public CepResult testCep(@RequestParam String cep) {
-        IMPViaCep validateCEP = new IMPViaCep();
-        Endereco end = validateCEP.consultarCEP(cep);
+        EnderecoDTO end = validateCEP.consultarCEP(cep);
 
-        if(end.getLocalidade().equals("Curitiba")){
+        if(end.localidade().equals("Curitiba")){
             return new CepResult(true, "Nice");
         }
         return new CepResult(false, "Deu ruim!");
     }
 
-    // Exercio 5 - 
 }

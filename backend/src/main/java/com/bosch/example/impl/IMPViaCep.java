@@ -1,23 +1,18 @@
 package com.bosch.example.impl;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-
 import org.springframework.web.client.RestTemplate;
 
-import com.bosch.example.Services.ViaCepService;
+import com.bosch.example.Services.CepService;
+import com.bosch.example.dto.EnderecoDTO;
 import com.bosch.example.utils.Endereco;
 
 
-public class IMPViaCep implements ViaCepService {
+public class IMPViaCep implements CepService {
     @Override
-    public Endereco consultarCEP(String cep) {
+    public EnderecoDTO consultarCEP(String cep) {
         String url = "https://viacep.com.br/ws/" + cep + "/json/";
         RestTemplate restTemplate = new RestTemplate();
-        Endereco endereco = restTemplate.getForObject(url, Endereco.class);
+        EnderecoDTO endereco = restTemplate.getForObject(url, EnderecoDTO.class);
         return endereco;
     }
     
