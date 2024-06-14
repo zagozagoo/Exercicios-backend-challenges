@@ -4,8 +4,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.bosch.example.Services.CepService;
 import com.bosch.example.dto.EnderecoDTO;
-import com.bosch.example.utils.Endereco;
-
 
 public class IMPViaCep implements CepService {
     @Override
