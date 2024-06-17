@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.bosch.example.model.User;
 
-public interface UserCreateService {
+public interface UserService {
     void save(User user);
     List<User> findByEmailContaining(String user);
     List<User> findByUsernameContaining(String user);
